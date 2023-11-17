@@ -19,4 +19,32 @@ try {
 }
 
 echo '<prer>';
-print_r($result);
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1> ProDucts</h1>
+    <table border="1">
+        <tr>
+            <th>STT</th>
+            <th>Name</th>
+            <th>image</th>
+            <th>price</th>
+        </tr>
+        <?php foreach($result as $key => $value): ?>
+        <tr>
+            <th><?= $value['id']?></th>
+            <th><?= $value['name']?></th>
+            <th><?= $value['image']?></th>
+            <th><?= $value['price']?></th>
+        </tr>
+        <?php endforeach; ?>
+    </table>
+</body>
+</html>
