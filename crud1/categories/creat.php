@@ -18,7 +18,7 @@
             <div class="row">
                 <h1>FROM - Thêm Mới Danh Mục</h1>
 
-                <form action="logic/logic-them-moi.php" method="post">
+                <form action="logic/logic-them-moi.php" method="post" enctype="multipart/form-data">
                     <label for="name">Name</label>
                     <input type="text" name="name" id="name" class="form-control">
 
