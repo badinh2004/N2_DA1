@@ -1,30 +1,43 @@
 <?php
+
 require_once '../../connect-db.php';
+
 try {
     $sql = "
-    UPDATE categories 
-    SET 
-        name      = :name,
-        image     = :image,
-        is_active = :is_active
-    WHERE 
-        id        = :id;
-";
+        UPDATE categories 
+        SET 
+            name = :name,
+            image = :image,
+            is_active = :is_active
+        WHERE 
+            id = :id;
+    ";
 
     $stmt = $conn->prepare($sql);
 
-    $stmt->bindParam(':name',      $_POST['name']);
-    $stmt->bindParam(':image',     $_POST['image']);
+    $stmt->bindParam(':name', $_POST['name']);
     $stmt->bindParam(':is_active', $_POST['is_active']);
-    $stmt->bindParam(':id',        $_POST['id']);
+    $stmt->bindParam(':id', $_POST['id']);
+
+    $img = $_FILES['image'] ?? null;
+    // Xử lý upload ảnh
+    if ($img) { // Khi mà có upload ảnh lên thì mới xử lý upload
+        $pathUpload = '../uploads/' . $img['name'];
+        $pathSaveDB = 'uploads/' . $img['name'];
+
+        // Upload file lên để lưu trữ
+        if (move_uploaded_file($img['tmp_name'], $pathUpload)) {
+            $stmt->bindParam(':image', $pathSaveDB);
+        } else {
+            $stmt->bindParam(':image', $_POST['img-current']);
+        }
+    } else {
+        $stmt->bindParam(':image', $_POST['img-current']);
+    }
 
     $stmt->execute();
 
-    $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-    header('location: ../index.php');
+    header('Location: ../index.php');
 } catch (Exception $e) {
     die($e->getMessage());
 }
-// echo '<pre>';
-// print_r($result);

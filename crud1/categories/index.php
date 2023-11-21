@@ -50,7 +50,7 @@
                     <td><?= $value['id'] ?></td>
                     <td><?= $value['name'] ?></td>
                     <td>
-                        <img src="<?= $value['image'] ?>" alt="loi">
+                        <img src="<?= $value['image'] ?>" alt="loi" width="100px">
                     </td>
                     <td>
                         <?= $value['is_active'] ? 'yes' : 'no' ?>
