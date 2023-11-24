@@ -16,7 +16,7 @@
     <div class="container">
         <div class="row">
             <h1>ADD_FORM</h1>
-            <form action="suly/su-ly-them-moi.php" method="post">
+            <form action="logic/logic-them-moi.php" method="post" enctype="multipart/form-data">
                 <label for="name">NAME</label>
                 <input type="text" name="name" class="form-control">
 

@@ -4,8 +4,8 @@ require_once '../../connect-db.php';
 
 try {
     $sql = "
-        INSERT INTO categories (name, image, is_active)
-        VALUES (:name, :image, :is_active);
+        INSERT INTO categories (name, img, is_active)
+        VALUES (:name, :img, :is_active);
     ";
 
     $stmt = $conn->prepare($sql);
@@ -13,23 +13,20 @@ try {
     $stmt->bindParam(':name', $_POST['name']);
     $stmt->bindParam(':is_active', $_POST['is_active']);
 
-    $image = $_FILES['image'] ?? null;
+    $img = $_FILES['img'] ?? null;
+    $pathSaveDB = '';
     // Xử lý upload ảnh
-    if ($image) { // Khi mà có upload ảnh lên thì mới xử lý upload
+    if ($img) { // Khi mà có upload ảnh lên thì mới xử lý upload
 
-        $pathUpload = '../uploads/' . $image['name'];
-        $pathSaveDB = 'uploads/' . $image['name'];
+        $pathUpload = __DIR__ . '/../uploads/' . $img['name'];
 
         // Upload file lên để lưu trữ
-        if (move_uploaded_file($image['tmp_name'], $pathUpload)) {
-            $stmt->bindParam(':image', $pathSaveDB);
-        } else {
-            $pathSaveDB = '';
-            $stmt->bindParam(':image', $pathSaveDB);
+        if (move_uploaded_file($img['tmp_name'], $pathUpload)) {
+            $pathSaveDB = 'uploads/' . $img['name'];
         }
-    } else {
-        $stmt->bindParam(':image', $image);
     }
+
+    $stmt->bindParam(':img', $pathSaveDB);
 
     $stmt->execute();
 

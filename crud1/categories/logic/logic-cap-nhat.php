@@ -7,7 +7,7 @@ try {
         UPDATE categories 
         SET 
             name = :name,
-            image = :image,
+            img = :img,
             is_active = :is_active
         WHERE 
             id = :id;
@@ -19,23 +19,26 @@ try {
     $stmt->bindParam(':is_active', $_POST['is_active']);
     $stmt->bindParam(':id', $_POST['id']);
 
-    $img = $_FILES['image'] ?? null;
+    $img = $_FILES['img'] ?? null;
+    $pathSaveDB = $_POST['img-current']; // Lưu lại giá trị ảnh hiện tại
+
     // Xử lý upload ảnh
     if ($img) { // Khi mà có upload ảnh lên thì mới xử lý upload
-        $pathUpload = '../uploads/' . $img['name'];
-        $pathSaveDB = 'uploads/' . $img['name'];
+        $pathUpload = __DIR__ . '/../uploads/' . $img['name'];
 
         // Upload file lên để lưu trữ
         if (move_uploaded_file($img['tmp_name'], $pathUpload)) {
-            $stmt->bindParam(':image', $pathSaveDB);
-        } else {
-            $stmt->bindParam(':image', $_POST['img-current']);
+            $pathSaveDB = 'uploads/' . $img['name'];
         }
-    } else {
-        $stmt->bindParam(':image', $_POST['img-current']);
     }
 
+    $stmt->bindParam(':img', $pathSaveDB);
+
     $stmt->execute();
+
+    if ($_POST['img-current'] != $pathSaveDB) {
+        unlink($_POST['img-current']);
+    }
 
     header('Location: ../index.php');
 } catch (Exception $e) {

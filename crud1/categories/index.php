@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Danh Sach Danh Muc</title>
+    <title>Danh sách Danh mục</title>
+
     <style>
         table {
             font-family: arial, sans-serif;
             border-collapse: collapse;
             width: 100%;
-            border-radius:10px ;
         }
 
         td,
@@ -21,48 +21,52 @@
         }
 
         tr:nth-child(even) {
-            background-color: #A9EAFB;
+            background-color: #dddddd;
         }
-        
     </style>
 </head>
 
 <body>
-    <?php
-    require_once 'logic/logic-danh-sach.php'; ?>
-    <table class="table">
-        <caption>
-            <h1>Danh Sách Danh Mục</h1>
-            <a href="creat.php"><button type="submit"> Thêm Mới</button></a>
-        </caption>
-        <thead class="thead-dark">
-            <tr style="background-color:#6ACBFC;">
-                <th scope="col">STT</th>
-                <th scope="col">Name</th>
-                <th scope="col">Image</th>
-                <th scope="col">IsActive</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($result as $key => $value) : ?>
-                <tr>
-                    <td><?= $value['id'] ?></td>
-                    <td><?= $value['name'] ?></td>
-                    <td>
-                        <img src="<?= $value['image'] ?>" alt="loi" width="100px">
-                    </td>
-                    <td>
-                        <?= $value['is_active'] ? 'yes' : 'no' ?>
-                    </td>
-                    <td>
-                    <a href="update.php?id=<?= $value['id'] ?>"><button type="submit">Cập Nhật</button></a>
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
 
+    <?php require_once 'logic/logic-danh-sach.php'; ?>
+
+    <table>
+        <caption>
+            <h1>Danh sách danh mục</h1>
+            <a href="create.php">Thêm mới</a>
+        </caption>
+
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Img</th>
+            <th>IsActive</th>
+            <th>Action</th>
+        </tr>
+
+        <?php foreach ($result as $key => $value) : ?>
+
+            <tr>
+                <td><?= $value['id'] ?></td>
+                <td><?= $value['name'] ?></td>
+                <td>
+                    <img src="<?= $value['img'] ?>" width="100px" alt="loi">
+                </td>
+                <td>
+                    <?= $value['is_active'] ? 'Yes' : 'No'  ?>
+                </td>
+                <td>
+                    <button><a href="update.php?id=<?= $value['id'] ?>">Cập nhật</a></button>
+                    <form action="delete.php?id=<?= $value['id'] ?>" method="post">
+                        <input type="hidden" name="img" value="<?= $value['img'] ?>">
+                        <button type="sumit" onclick="return confirm('có chắc chắn xóa không ?')">Xóa</button>
+                    </form>
+                </td>
+            </tr>
+
+        <?php endforeach; ?>
+
+    </table>
 </body>
 
 </html>
