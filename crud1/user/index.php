@@ -46,7 +46,7 @@
             <td><?= $value['name'] ?></td>
             <td><?= $value['email'] ?></td>
             <td><?= $value['password'] ?></td>
-            <td><img src="<?= $value['image'] ?>" alt="loi"></td>
+            <td><img src="<?= $value['image'] ?>" alt="loi" width="200px"></td>
             <td>
                 <button type="submit"><a href="update.php?id=<?= $value['id']?>">UPDATE</a></button>
                 <button type="submit"><a href="delete.php?id=<?= $value['id']?>">DELETE</a></button>
