@@ -1,3 +1,4 @@
+<?php require_once '../session.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,12 +18,21 @@
 <body>
     <?php require_once 'logic/logic-lay-1-theo-id.php'; ?>
     <div class="container">
+        <?php if (!empty($_SESSION['error'])) : ?>
+            <div class="alert alert-danger mt-5">
+                <ul>
+                    <?php foreach ($_SESSION['error'] as $item) : ?>
+                        <li><?= $item ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
         <div class="row">
             <h1>Sửa Brands</h1>
             <form action="logic/logic-cap-nhat.php" method="post" enctype="multipart/form-data">
 
                 <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
-                
+
                 <label for="name">NAME</label>
                 <input type="text" name="name" class="form-control" value="<?= $result['name'] ?>">
 

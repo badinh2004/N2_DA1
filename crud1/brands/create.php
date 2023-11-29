@@ -1,3 +1,4 @@
+<?php require_once '../session.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +17,15 @@
 
 <body>
     <div class="container">
+        <?php if (!empty($_SESSION['error'])) : ?>
+            <div class="alert alert-danger mt-5">
+                <ul>
+                    <?php foreach ($_SESSION['error'] as $item) : ?>
+                        <li><?= $item ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
         <div class="row">
             <h1>Thêm Brands</h1>
             <form action="logic/logic-them-moi.php" method="post" enctype="multipart/form-data">

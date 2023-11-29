@@ -22,6 +22,16 @@
     ?>
     <div class="container">
         <div class="row">
+            <?php if (!empty($_SESSION['error'])) : ?>
+                <div class="alert alert-danger mt-5">
+                    <ul>
+                        <?php foreach ($_SESSION['error'] as $item) : ?>
+                            <li><?= $item ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
             <h1>Sửa</h1>
             <form action="logic/logic-cap-nhat.php" method="post" enctype="multipart/form-data">
 

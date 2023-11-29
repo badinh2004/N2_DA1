@@ -16,11 +16,21 @@
 </head>
 
 <body>
-    <?php 
-    require_once 'logic/logic-lay-all-category.php'; 
+    <?php
+    require_once 'logic/logic-lay-all-category.php';
     ?>
     <div class="container">
         <div class="row">
+            <?php if (!empty($_SESSION['error'])) :?>
+                <div class="alert alert-danger mt-5">
+                    <ul>
+                        <?php foreach ($_SESSION['error'] as $item) : ?>
+                            <li><?= $item ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
             <h1>Thêm</h1>
             <form action="logic/logic-them-moi.php" method="post" enctype="multipart/form-data">
                 <label for="title">TITLE</label>
@@ -28,8 +38,8 @@
 
                 <label for="category_id">CATEGORY</label>
                 <select name="category_id" id="category_id" class="form-control">
-                    <?php foreach($categories as $category): ?>
-                        <option value="<?= $category['id']?>"><?= $category['name']?></option>
+                    <?php foreach ($categories as $category) : ?>
+                        <option value="<?= $category['id'] ?>"><?= $category['name'] ?></option>
                     <?php endforeach; ?>
                 </select>
 

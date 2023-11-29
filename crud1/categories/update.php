@@ -16,36 +16,44 @@
 
 <body>
 
-<?php require_once 'logic/logic-lay-1-theo-id.php'; ?>
+    <?php require_once 'logic/logic-lay-1-theo-id.php'; ?>
 
-<div class="container">
-    <div class="row">
-        <h1>FORM - Thêm mới danh mục</h1>
+    <div class="container">
+        <div class="row">
+            <?php if (!empty($_SESSION['error'])) : ?>
+                <div class="alert alert-danger mt-5">
+                    <ul>
+                        <?php foreach ($_SESSION['error'] as $item) : ?>
+                            <li><?= $item ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
 
-        <form action="logic/logic-cap-nhat.php" method="POST" enctype="multipart/form-data">
-           
-            <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
-        
-            <label for="name">Name</label>
-            <input type="text" class="form-control" 
-                name="name" id="name" 
-                value="<?= $result['name'] ?>">
+            <h1>FORM - Thêm mới danh mục</h1>
 
-            <label for="img" class="mt-2">Img</label>
-            <input type="file" class="form-control" name="img" id="img">
-            <input type="hidden" name="img-current" id="img-current" value="<?= $result['img'] ?>">
-            <img src="<?= $result['img'] ?>" width="100px" alt=""> <br/>
+            <form action="logic/logic-cap-nhat.php" method="POST" enctype="multipart/form-data">
 
-            <label for="is_active" class="mt-2">Is Active</label>
-            <select name="is_active" id="is_active" class="form-control">
-                <option <?= $result['is_active'] ? 'selected' : '' ?> value="1">Yes</option>
-                <option <?= $result['is_active'] ? '' : 'selected' ?> value="0">No</option>
-            </select>
+                <input type="hidden" name="id" value="<?= $_GET['id'] ?>">
 
-            <button type="submit" class="btn btn-primary mt-2">Submit</button>
-        </form>
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" id="name" value="<?= $result['name'] ?>">
+
+                <label for="img" class="mt-2">Img</label>
+                <input type="file" class="form-control" name="img" id="img">
+                <input type="hidden" name="img-current" id="img-current" value="<?= $result['img'] ?>">
+                <img src="<?= $result['img'] ?>" width="100px" alt=""> <br />
+
+                <label for="is_active" class="mt-2">Is Active</label>
+                <select name="is_active" id="is_active" class="form-control">
+                    <option <?= $result['is_active'] ? 'selected' : '' ?> value="1">Yes</option>
+                    <option <?= $result['is_active'] ? '' : 'selected' ?> value="0">No</option>
+                </select>
+
+                <button type="submit" class="btn btn-primary mt-2">Submit</button>
+            </form>
+        </div>
     </div>
-</div>
 
 </body>
 

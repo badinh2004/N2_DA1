@@ -1,3 +1,4 @@
+<?php require_once '../session.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,6 +19,16 @@
     <?php require_once 'logic/logic-lay-all-brands.php'; ?>
     <div class="container">
         <div class="row">
+            <?php if (!empty($_SESSION['error'])) : ?>
+                <div class="alert alert-danger mt-5">
+                    <ul>
+                        <?php foreach ($_SESSION['error'] as $item) : ?>
+                            <li><?= $item ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+
             <h1>Thêm cars</h1>
             <form action="logic/logic-them-moi.php" method="post" enctype="multipart/form-data">
                 <label for="name">NAME</label>
@@ -28,8 +39,8 @@
 
                 <label for="brand_id">BRAND</label>
                 <select name="brand_id" id="brand_id" class="form-control">
-                    <?php foreach($brands as $brand): ?>
-                        <option value="<?= $brand['id']?>"><?= $brand['name']?></option>
+                    <?php foreach ($brands as $brand) : ?>
+                        <option value="<?= $brand['id'] ?>"><?= $brand['name'] ?></option>
                     <?php endforeach; ?>
                 </select>
 
