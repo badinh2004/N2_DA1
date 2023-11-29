@@ -22,7 +22,9 @@
             <nav>
                 <a class="btn btn-info" href="categories/index.php">DANH MỤC</a>
                 <a class="btn btn-info" href="brands/index.php">THƯƠNG HIỆU</a>
-                <a class="btn btn-info" href="cars/index.php">Xe</a>
+                <a class="btn btn-info" href="cars/index.php">XE</a>
+                <a class="btn btn-info" href="posts/index.php">POST</a>
+                
             </nav>
         </div>
     </div>

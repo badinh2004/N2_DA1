@@ -1,3 +1,4 @@
+<?php require_once '../session.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,6 +18,17 @@
 
 <div class="container">
     <div class="row">
+        <?php if (!empty($_SESSION['error'])):?>
+        <div class="alert alert-danger mt-5">
+            <ul>
+                <?php foreach ($_SESSION['error'] as $item): ?>
+                <li><?= $item ?></li>
+                <?php endforeach; ?>
+            </ul>
+        </div>
+        <?php  endif;?>
+
+
         <h1>FORM - Thêm mới danh mục</h1>
 
         <form action="logic/logic-them-moi.php" method="POST" enctype="multipart/form-data">

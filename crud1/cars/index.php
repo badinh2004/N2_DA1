@@ -40,9 +40,9 @@
                     <td><img src="<?= $value['c_img'] ?>" alt="loi" width="200px"></td>
 
                     <td>
-                        <a class="btn btn-info" href="update.php?id=<?= $value['id'] ?>">sửa</a>
-                        <form action="delete.php?id=<?= $value['id'] ?>" method="post">
-                            <input type="hidden" name="img" value="<?= $value['img'] ?>">
+                        <a class="btn btn-info" href="update.php?id=<?= $value['c_id'] ?>">sửa</a>
+                        <form action="delete.php?id=<?= $value['c_id'] ?>" method="post">
+                            <input type="hidden" name="img" value="<?= $value['c_img'] ?>">
                             <button type="submit" onclick="return confirm('bạn có chắc chắn xóa ? ')" class="btn btn-info mt-2">Xóa</button>
                         </form>
                     </td>
