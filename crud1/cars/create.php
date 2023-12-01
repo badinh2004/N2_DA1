@@ -1,4 +1,9 @@
-<?php require_once '../session.php'; ?>
+<?php 
+require_once '../session.php';
+if (empty($_SESSION['user'])) {
+    header('location: ../login.php');
+    exit();
+} ?>
 <!DOCTYPE html>
 <html lang="en">
 

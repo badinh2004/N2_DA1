@@ -1,10 +1,3 @@
-<?php 
-require_once 'session.php';
-if (empty($_SESSION['user'])) {
-    header('location: login.php');
-    exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,14 +20,8 @@ if (empty($_SESSION['user'])) {
             <h1>Trang Tổng Quan</h1>
 
             <nav>
-                <a class="btn btn-info" href="categories/index.php">DANH MỤC</a>
-                <a class="btn btn-info" href="brands/index.php">THƯƠNG HIỆU</a>
-                <a class="btn btn-info" href="cars/index.php">XE</a>
-                <a class="btn btn-info" href="posts/index.php">POST</a>
-                <a class="btn btn-info" href="logout.php">đăng xuất</a>
-                <?php echo '<pre>';
-                      print_r($_SESSION['user'])
-                      ?>
+                <a href="flights/index.php" class="btn btn-info">FLIGHTS</a>
+                
             </nav>
         </div>
     </div>
